@@ -4,16 +4,27 @@ import React, {Component} from "react";
 type TransactionFormProps = {
   handleSubmit(amount: number): void
 }
-export class TransactionForm extends Component<TransactionFormProps, {}> {
 
+type TransactionFormState = {
+  amount: number
+}
+export class TransactionForm extends Component<TransactionFormProps, TransactionFormState> {
+  state = {
+    amount: 0
+  }
+
+  submitTransaction = (e: React.FormEvent) => {
+    e.preventDefault()
+    this.props.handleSubmit(this.state.amount)
+  }
 
 render() {
-  const { handleSubmit } = this.props
   return (
-    <form onSubmit={(e) => {
-      e.preventDefault() 
-      handleSubmit(100)
-    }}>
+    <form onSubmit={ this.submitTransaction }>
+      <input onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({amount: +e.currentTarget.value
+        })}}>
+        </input>
       <button>Submit</button>
     </form>
   )

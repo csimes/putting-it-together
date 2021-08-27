@@ -1,12 +1,26 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
+import { Transaction } from "./Checking"
 
-export class TransactionHistory extends Component {
+type TransactionHistoryProps = {
+  transactions: Transaction[]
+}
+export class TransactionHistory extends Component<TransactionHistoryProps, {}> {
 
 render() {
+  const { transactions } = this.props;
   return (
-    <>
-      Transaction History Component
-    </>
+    <ul>
+      {transactions.map((t, index) => {
+        return (
+          <li key={index}>
+            {`Type: ${t.type} ... Amount: ${t.amount}`}
+          </li>
+        )
+      })}
+          
+          
+        
+    </ul>
   )
 }
 }
