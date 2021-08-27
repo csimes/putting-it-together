@@ -1,12 +1,21 @@
 import React, {Component} from "react";
 
-export class TransactionForm extends Component {
+
+type TransactionFormProps = {
+  handleSubmit(amount: number): void
+}
+export class TransactionForm extends Component<TransactionFormProps, {}> {
+
 
 render() {
+  const { handleSubmit } = this.props
   return (
-    <>
-      TransactionForm Component
-    </>
+    <form onSubmit={(e) => {
+      e.preventDefault() 
+      handleSubmit(100)
+    }}>
+      <button>Submit</button>
+    </form>
   )
 }
 }
